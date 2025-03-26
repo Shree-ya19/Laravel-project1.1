@@ -1,0 +1,49 @@
+@extends('admin.layout.master')
+
+@section('container')
+
+<div class="container mt-5">
+    <!-- Add New Record Button -->
+    <div class="d-flex justify-content-end mb-4">
+        <button class="btn btn-primary">
+            <a href="{{route('admin.category.create')}}" style="color: white; text-decoration: none;">Add New Record</a>
+        </button>
+    </div>
+
+    <div class="card shadow p-4">
+        <h3 class="mb-4">Catogory</h3>
+
+        <!-- Bootstrap Table -->
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Category Name </th>
+                    <th>Sub Category Name </th>
+                    <th>Slug</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                    
+
+                </tr>
+            @forelse($categories as $category)
+                <!-- Single Data Row -->
+                <tr>
+                    <td>{{$category->id}}</td>
+                    <td>{{$category->title}}</td>
+                    <td>{{$category->title}}</td>
+                    <td>{{$category->slug}}</td>
+                    <td>{{$category->description}}</td>
+                  
+                    <td>
+                        <a href="{{ route('admin.category.edit',$category) }}" class="btn btn-primary btn-sm">Edit</a>
+                    </td>
+                </tr>
+                @empty
+        <td colspan="6">No data found</td>
+        @endforelse
+            
+        </table>
+    </div>
+</div>
+@endsection
