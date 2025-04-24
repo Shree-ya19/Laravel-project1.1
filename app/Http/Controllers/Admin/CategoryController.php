@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::whereNotNull('category_id')->get();  
         return view('admin.category.index',compact('categories'));
         
     }
@@ -51,10 +51,10 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(category $category)
+    public function edit(Category $category)
     {
-        
-        return view('admin.category.edit',compact('category'));
+        $categories = Category::with('categories')->where('category_id',NULL)->get(); // Fetch all categories
+        return view('admin.category.edit',compact('category','categories'));
         
     }
 
@@ -71,8 +71,9 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return back();
     }
 }

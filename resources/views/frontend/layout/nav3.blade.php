@@ -4,7 +4,7 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mx-5">
           <li class="nav-item drop">
-            <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
+            <a class="nav-link active" aria-current="page" href="{{ route('welcome') }}">Home</a>
           </li>
           <li class="nav-item drop">
             <a class="nav-link active" href="{{ route('about') }}">About</a>

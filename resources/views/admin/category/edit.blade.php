@@ -20,7 +20,15 @@
                 <label for="title2" class="form-label">Slug</label>
                 <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug',$category->slug) }}">
             </div>
-
+            <div class="mb-3">
+                    <label for="category_id" class="form-label">Category </label>
+                    <select class="form-select" name="category_id" id="category_id" aria-label="Floating label select example">
+                        <option value="">Select Category</option> <!-- Default option -->
+                        @foreach($categories as $categoryList)
+                        <option value="{{ $categoryList->id }}"{{ old('category_id',$category->category_id) == $categoryList->id ? 'selected':'' }}>{{ $categoryList->title }}</option>
+                        @endforeach
+                    </select>
+                </div>
             <!-- Image -->
             
 

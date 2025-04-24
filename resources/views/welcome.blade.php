@@ -10,7 +10,7 @@
             </div>
 
             <div class="heading1 mt-3">
-                <h1 class="heading1">{{$about->title1}}<span class="fashion">Fashion</span> {{$about->title2 }}</h1>
+                <h1 class="heading1">{{ $about?->title1 }}<span class="fashion">Fashion</span> {{$about->title2 }}</h1>
             </div>
 
             <p class="paragraph1 mt-4">{!! $about->description!!}</p>
@@ -61,9 +61,9 @@
 
         <div class="col-md-3">
             <div class="hover1">
-                <i class="{{$feature->icon}}"></i>
-                <h3>{{$feature->title}}</h3>
-                <p> {!! $feature->description !!}</p>
+                <i class="{{$features->icon}}"></i>
+                <h3>{{$features->title}}</h3>
+                <p> {!! $features->description !!}</p>
             </div>
         </div>
 
@@ -95,7 +95,7 @@
 </div>
 
 {{-- slider --}}
-<div class="container-fluid mt-5 bg bg-white p-5">
+{{-- <div class="container-fluid mt-5 bg bg-white p-5">
     <div class="slider">
         <div class="row">
             <div class="col-md-2">
@@ -151,7 +151,20 @@
             </div>
         </div>
     </div>
-</div>
+</div>--}}
+<div class="carousel mt-5">
+    <div class="carousel-container">
+        @foreach ($products as $product)
+            <div class="card">
+              <a href="{{ route('productDetail',$product) }}">
+                <img src="{{ $product->thumbnail }}"></a>
+                <p>{{ $product->name }}</p>
+            </div>
+        @endforeach
+
+    </div>
+</div
+
 
 {{-- best seller --}}
 <div class="container-fluid">

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\About;
+use App\Models\Category;
 use App\Models\Feature;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -11,8 +13,10 @@ class FrontendController extends Controller
     public function index()
     {
         $about = About::first();
-        $feature = Feature::first();
-        return view("welcome",compact('about','feature'));
+        $features = Feature::first();
+        $categories = Category::first();
+        $products = Product::with('category')->get();
+        return view('welcome',compact('about', 'features','products','categories'));
     }
     public function about()
     {
@@ -41,5 +45,11 @@ class FrontendController extends Controller
     public function checkout()
     {
         return view('frontend.checkout');
+    }
+
+    public function productDetail(Product $product)
+    {
+        $product->load('files');
+        return view('frontend.product',compact('product'));
     }
 }

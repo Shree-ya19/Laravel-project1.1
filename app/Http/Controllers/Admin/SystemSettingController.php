@@ -25,7 +25,6 @@ class SystemSettingController extends Controller
     public function create()
     {
         $systemSettings = SystemSetting::get();
-        Alert::success('System Setting Created Successfully');
         return view('admin.systemSetting.create',compact('systemSettings'));
     }
 
@@ -35,7 +34,7 @@ class SystemSettingController extends Controller
     public function store(StoreSystemSettingRequest $request)
     {
         SystemSetting::create($request->validated());
-        Alert::success('System Setting stored Successfully');
+        Alert::success('System Setting Created Successfully');
         return back();
     }
 

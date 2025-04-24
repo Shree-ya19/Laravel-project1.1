@@ -17,30 +17,17 @@ return [
         'guard' => 'web',
         'passwords' => 'users',
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication Guards
-    |--------------------------------------------------------------------------
-    |
-    | Next, you may define every authentication guard for your application.
-    | Of course, a great default configuration has been defined for you
-    | here which uses session storage and the Eloquent user provider.
-    |
-    | All authentication drivers have a user provider. This defines how the
-    | users are actually retrieved out of your database or other storage
-    | mechanisms used by this application to persist your user's data.
-    |
-    | Supported: "session"
-    |
-    */
-
-    'guards' => [
+'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'customer' => [
+            'driver' => 'session',
+            'provider' => 'customers',
+        ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +51,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'customers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Customer::class,
+        ],
+
 
         // 'users' => [
         //     'driver' => 'database',
@@ -97,7 +89,14 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'customers' => [
+            'provider' => 'customers',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------
