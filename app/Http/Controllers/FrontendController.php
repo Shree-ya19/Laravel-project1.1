@@ -13,7 +13,7 @@ class FrontendController extends Controller
     public function index()
     {
         $about = About::first();
-        $features = Feature::first();
+        $features = Feature::limit(4)->get();
         $categories = Category::first();
         $products = Product::with('category')->get();
         return view('welcome',compact('about', 'features','products','categories'));

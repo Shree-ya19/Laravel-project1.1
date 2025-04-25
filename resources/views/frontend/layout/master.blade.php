@@ -18,6 +18,7 @@
 
 {{-- navbar3 --}}
 @include('frontend.layout.nav3')
+@include('sweetalert::alert') 
 
 @yield('container')
 

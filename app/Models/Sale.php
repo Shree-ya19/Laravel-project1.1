@@ -14,6 +14,8 @@ class Sale extends Model
 
         'customer_id',
         'product_id',
+        'status',
+        'add_to_cart',
         'purchased_quantity'
     ];
 
@@ -24,5 +26,13 @@ class Sale extends Model
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class, 'product_id');
+    }
+    public function getProductPriceAttribute()
+    {
+        return $this->Product->price;
+    }
+    public function getTotalAmountAttribute()
+    {
+        return $this->purchased_quantity*$this->Product->price;
     }
 }

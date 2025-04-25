@@ -58,38 +58,16 @@
 {{-- four column --}}
 <div class="container-fluid bg bg-light mt-5">
     <div class="row mx-5 p-5 text-center">
-
+@foreach($features as $feature)
         <div class="col-md-3">
             <div class="hover1">
-                <i class="{{$features->icon}}"></i>
-                <h3>{{$features->title}}</h3>
-                <p> {!! $features->description !!}</p>
+                <i class="{{$feature->icon}}"></i>
+                <h3>{{$feature->title}}</h3>
+                <p> {!! $feature->description !!}</p>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="hover1">
-                <i class="bi bi-piggy-bank"></i>
-                <h3>Money Back Guarantee</h3>
-                <p> Assumenda molestiae reprehenderit ducimus, dolore pariatur nesciunt qui accusantium?</p>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="hover1">
-                <i class="bi bi-percent"></i>
-                <h3>Discount Offers</h3>
-                <p> Assumenda molestiae reprehenderit ducimus, dolore pariatur nesciunt qui accusantium?</p>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="hover1">
-                <i class="bi bi-headset"></i>
-                <h3>24/7 Support</h3>
-                <p> Assumenda molestiae reprehenderit ducimus, dolore pariatur nesciunt qui accusantium?</p>
-            </div>
-        </div>
+       @endforeach
 
     </div>
 </div>

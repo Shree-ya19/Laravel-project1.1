@@ -43,7 +43,6 @@
             <!-- Navbar Start -->
             @include('admin.layout.navbar')
             <!-- Navbar End -->
-            @include('sweetalert::alert') 
 
             @include('sweetalert::alert')
 
