@@ -10,3 +10,4 @@ Route::get('dashboard',[CustomerController::class,'dashboard'])->name('dashboard
 Route::put('logout',[CustomerAuthController::class,'logout'])->name('logout');
     
 Route::resource('order',OrderController::class);        
+Route::post('add_to_cart/{product}',[OrderController::class,'addToCart'])->name('addToCart');

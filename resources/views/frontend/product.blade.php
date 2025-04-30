@@ -183,12 +183,12 @@
             <button class="cart-btn">🛒 Cart</button>
         </div>
     </header>
-
     <div class="product-container">
         <!-- Product Image Carousel -->
         <div class="carousel">
-            @foreach ($product->files as $index=> $file )
-            <img src="{{ $file->file_url }}" class="{{ $index===0 ? 'active': '' }}" alt="Product Image{{ $index + 1 }}">
+            @foreach ($product->files as $index => $file)
+            <img src="{{ $file->file_url }}" class="{{ $index === 0 ? 'active' : '' }}"
+                alt="Product Image{{ $index + 1 }}">
             @endforeach
             <div class="carousel-controls">
                 <button id="prev">❮</button>
@@ -201,39 +201,43 @@
             <h1>Luxury Leather Handbag</h1>
             <p class="price">$149.99 <span class="old-price">$199.99</span> <span class="discount">-25%</span></p>
             <p class="description">Premium quality leather handbag with spacious compartments and an elegant design.</p>
-            <div class="d-flex">
 
-                <form action="{{ route('sale',$product) }}" method="POST">
-                    @csrf
-                    <div class="quantity">
-                        <label>Quantity:</label>
-                        <a class="qty-btn" id="minus">-</a>
-                        <input type="text" id="quantity" name="purchased_quantity" value="1">
-                        <a class="qty-btn" id="plus">+</a>
-                    </div>
+            <form action="{{ route('sale', $product) }}" method="POST">
+                @csrf
+                <div class="quantity mb-3">
+                    <label>Quantity:</label>
+                    <a class="qty-btn" id="minus">-</a>
+                    <input type="text" id="quantity" name="purchased_quantity" value="1">
+                    <a class="qty-btn" id="plus">+</a>
+                </div>
 
-                    <div class="buttons">
+                <div class="d-flex gap-2">
+                    <button type="submit" class="buy-now">Buy Now</button>
+            </form>
 
-                        <button type="submit" class="buy-now">Buy Now</button>
-                </form>
-                <form action="{{ route('addToCart',$product) }}" method="POST">
-                    @csrf
+            <form action="{{ route('customer.addToCart', $product) }}" method="POST">
+                @csrf
+             
 
-                    <button type="submit" class="add-to-cart">Add to Cart</button>
-                </form>
-            </div>
+                @if($detail && $detail->add_to_cart == 1)
+                <button type="submit" class="add-to-cart bg-danger">Added to Cart</button>
+                @else
+                <button type="submit" class="add-to-cart">Add to Cart</button>
+                @endif
+            </form>
         </div>
+    </div>
 
 
-        <div class="additional-info">
-            <h3>Product Details</h3>
-            <ul>
-                <li>Material: Genuine Leather</li>
-                <li>Color Options: Black, Brown, Red</li>
-                <li>Dimensions: 30cm x 25cm x 15cm</li>
-                <li>Shipping: Free worldwide shipping</li>
-            </ul>
-        </div>
+    <div class="additional-info">
+        <h3>Product Details</h3>
+        <ul>
+            <li>Material: Genuine Leather</li>
+            <li>Color Options: Black, Brown, Red</li>
+            <li>Dimensions: 30cm x 25cm x 15cm</li>
+            <li>Shipping: Free worldwide shipping</li>
+        </ul>
+    </div>
     </div>
     </div>
 

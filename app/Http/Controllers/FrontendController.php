@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Feature;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
@@ -49,7 +50,8 @@ class FrontendController extends Controller
 
     public function productDetail(Product $product)
     {
+        $detail = $product->ProductDetail->where('customer_id', Auth::guard('customer')->id())->first();
         $product->load('files');
-        return view('frontend.product',compact('product'));
+        return view('frontend.product',compact('product','detail'));
     }
 }

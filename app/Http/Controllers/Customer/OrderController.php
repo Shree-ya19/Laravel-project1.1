@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Customer;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Product;
+use App\Models\ProductDetail;
 use App\Models\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,10 +18,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $customer=Auth::guard('customer')->user()->id;
-        $sales=Sale::where('customer_id',$customer)->get();
-        return view('customer.order',compact('sales'));
-        
+        $customer = Auth::guard('customer')->user()->id;
+        $sales = Sale::where('customer_id', $customer)->get();
+        return view('customer.order', compact('sales'));
     }
 
     /**
@@ -71,21 +71,26 @@ class OrderController extends Controller
         //
     }
 
-    public function addToCart(Product $product)
-{
-    $sale = Sale::where('product_id', $product->id)->first();
-
-    if ($sale) {
-        $sale->update([
-            'add_to_cart' => !$sale->add_to_cart
-        ]);
-
-        Alert::success('Product added to cart successfully!');
-    } else {
-        Alert::error('Sale not found for this product.');
+    public function addToCart(Request $request, Product $product)
+    {
+        $customer = Auth::guard('customer')->user()->id;
+        
+        $productDetail = ProductDetail::where('product_id', $product->id)
+        ->where('customer_id', $customer)
+        ->first();
+        
+        if ($productDetail) {
+            $productDetail->add_to_cart = !$productDetail->add_to_cart;
+            $productDetail->save();
+        } else {
+            // Insert new entry with add_to_cart = 1
+            ProductDetail::create([
+                'product_id' => $product->id,
+                'customer_id' => $customer,
+                'add_to_cart' => 1
+            ]);
+        }
+        Alert::success('Product add to cart Successfully');
+        return back();
     }
-
-    return back();
-}
-
 }

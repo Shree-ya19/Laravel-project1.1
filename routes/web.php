@@ -48,7 +48,6 @@ Route::get('checkout',[FrontendController::class,'checkout'])->name('checkout');
 Route::get('productDetail/{product:name}', [FrontendController::class, 'productDetail'])->name('productDetail');
 
 Route::post('sale/{product:name}', [SaleController::class, 'sale'])->name('sale');
-Route::post('add_to_cart/{product}',[OrderController::class,'addToCart'])->name('addToCart');
 
 Route::post('upload',[UploadController::class,'store'])->name('upload');
 Route::prefix('file')->as('file.')->controller(FileController::class)->group(function () {
